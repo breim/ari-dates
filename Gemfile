@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 # Bootstraping
 gem 'bootstrap-sass'
+gem 'jquery-datetimepicker-rails'
+gem 'responders'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'

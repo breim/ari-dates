@@ -14,32 +14,65 @@
 </div>
 
 
-<h4>Listando as postagis..</h4>
-
-<table class="table">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Data da publicacao</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <td><%= post.title %></td>
-        <td><%= post.description[0..50] %></td>
-        <td><%= post.created_at.strftime("postado em %b, %m %Y - %H:%M") %></td>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= form_tag  search_posts_path , :class => "navbar-form navbar-left",:role => "search", method: :get, remote: true do %>
+<%= text_field_tag :data1, params[:data1], class: "form-control ", id: "data1" ,:name => "data1",:placeholder => "inicio" %>
+<%= text_field_tag :data2, params[:data2], class: "form-control ", id: "data2" ,:name => "data2",:placeholder => "fim" %>
+<button class="btn btn-default" type="submit">ok</button>
+<% end %>
 
 <br>
+<br>
+<br>
+<br>
+<br>
 
-<%= link_to 'New Post', new_post_path %>
+<div class="container">
+<div class="col-sm-12">
+  <h4>Listando as postagis..</h4>
+  <div id="posts">
+    <%= render 'posts/posts' %>
+  </div>
+  <div id="posts-hide"></div>
+  <br>
+  <%= link_to 'New Post', new_post_path %>
+</div>
+</div>
+
+<script type="text/javascript" >
+  $('#data1').datetimepicker({
+    lang:'pt',
+    i18n:{
+      pt:{
+        months:[
+        'Janeiro','Fevereiro','Março','Abril',
+        'Maio','Junho','Julho','Agosto',
+        'Setembro','Outubro','Novembro','Dezembro',
+        ],
+        dayOfWeek:[
+        "Dom", "Seg", "Ter", "Qua", 
+        "Qui", "Sex", "Sáb",
+        ]
+      }
+    },
+    timepicker:false,
+    format:'d/m/Y'
+  });
+  $('#data2').datetimepicker({
+    lang:'pt',
+    i18n:{
+      pt:{
+        months:[
+        'Janeiro','Fevereiro','Março','Abril',
+        'Maio','Junho','Julho','Agosto',
+        'Setembro','Outubro','Novembro','Dezembro',
+        ],
+        dayOfWeek:[
+        "Dom", "Seg", "Ter", "Qua", 
+        "Qui", "Sex", "Sáb",
+        ]
+      }
+    },
+    timepicker:false,
+    format:'d/m/Y'
+  });
+</script>

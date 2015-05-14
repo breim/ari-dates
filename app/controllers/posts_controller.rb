@@ -13,6 +13,16 @@ class PostsController < ApplicationController
     end
   end
 
+  def search
+    if params[:data1].present? && params[:data2].present?
+      @posts = Post.where( created_at: params[:data1].to_date.beginning_of_day..params[:data2].to_date.end_of_day)
+      respond_to  :js
+    else
+      flash[:alert] = "Você precisa preenhcer ambas as datas né tio."
+      @posts = Post.where( created_at: Date.today.beginning_of_month..Date.today.end_of_month)
+   end
+  end
+
   # GET /posts/1
   # GET /posts/1.json
   def show
